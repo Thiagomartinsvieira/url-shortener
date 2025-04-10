@@ -1,0 +1,67 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Link shortener url",
+        "description": "This api is responsible for shortening links",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3333",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/shorten": {
+            "post": {
+                "summary": "summary: Shortens a given long URL and returns a short URL",
+                "description": "This route will be responsible for shoterning the url",
+                "tags": [
+                    "Shorten"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "longUrl": {
+                                        "type": "string",
+                                        "example": "https://example.com"
+                                    }
+                                },
+                                "required": ["longUrl"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "URL shortened successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "slug": {
+                                            "type": "string",
+                                            "example": "abc123"
+                                        },
+                                        "shortUrl": {
+                                            "type": "string",
+                                            "example": "http://localhost:3333/abc123"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input or URL"
+                    }
+                }
+            }
+        }
+    }
+}
