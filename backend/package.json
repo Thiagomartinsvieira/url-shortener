@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "radash": "^12.1.0"
   }
 }
