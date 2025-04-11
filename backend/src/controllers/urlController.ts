@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { IUrlService } from '../services/urlService'
 import { isEmpty } from 'radash'
-import { error } from 'console'
+import { redirectUrlBodySchema, shortenUrlBodySchema } from '../schemas/urlSchema'
 
 
 export class UrlController {
@@ -12,7 +12,8 @@ export class UrlController {
 
     shortenUrl = async (req: Request, res: Response) => {
         try {
-            const { longUrl } = req.body
+            const { longUrl } = shortenUrlBodySchema.parse(req.body);
+
             const result = await this.urlService.createShortUrl(longUrl)
             const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3333}`
             res.status(201).send({ slug: result.slug, shortUrl: `${baseUrl}/${result.slug}` })
@@ -23,7 +24,8 @@ export class UrlController {
 
     redirectUrl = async (req: Request, res: Response) => {
         try {
-            const { slug } = req.params
+            const { slug } = redirectUrlBodySchema.parse(req.params);
+
             const url = await this.urlService.getUrlBySlug(slug)
             if (!url) res.status(404).send({ error: "Link not found" });
 
