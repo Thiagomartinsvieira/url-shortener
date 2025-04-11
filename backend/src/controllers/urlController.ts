@@ -38,13 +38,15 @@ export class UrlController {
 
     getAllLinks = async (req: Request, res: Response) => {
         try {
-            const links = this.urlService.getAllLinks();
-
-            if (isEmpty(links)) res.status(400).send({ error: "No links found" })
-
-            res.status(200).send(links);
+            const links = await this.urlService.getAllLinks();
+    
+            if (isEmpty(links)) return res.status(404).send({ error: "No links found" });
+    
+            return res.status(200).send(links);
         } catch (error) {
-            res.status(400).send({ error: 'Error while getting all links' })
+            console.error("Erro em getAllLinks:", error);
+            return res.status(500).send({ error: 'Error while getting all links' });
         }
     }
+    
 }
