@@ -1,11 +1,7 @@
-// services/urlServiceImpl.ts
-
 import { randomBytes } from 'crypto'
 import { isValidUrl } from '../utils/validateUrl'
 import { IUrlRepository } from '../repository/urlRepository'
 import { IUrlService } from './urlService'
-import { IUrl } from '../domain/Url'
-
 
 export class UrlServiceImpl implements IUrlService {
   urlRepository: IUrlRepository;

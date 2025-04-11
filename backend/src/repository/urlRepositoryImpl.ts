@@ -1,8 +1,5 @@
-// repository/urlRepositoryImpl.ts
-
 import { PrismaClient } from "@prisma/client"
 import { IUrlRepository } from "./urlRepository"
-import { IUrl } from "../domain/Url"
 
 export class UrlRepositoryImpl implements IUrlRepository {
   constructor(private readonly prisma: PrismaClient) {}

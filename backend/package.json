@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
     "dev": "tsx src/infrastructure/server/server.ts",
     "build": "tsup src/",
     "start": "node dist/infrastructure/server/server.js"
@@ -18,7 +19,8 @@
     "@types/swagger-ui-express": "^4.1.8",
     "prisma": "^6.6.0",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.1"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
