@@ -8,13 +8,17 @@ import { IUrl } from '../domain/Url'
 
 
 export class UrlServiceImpl implements IUrlService {
-  constructor(private readonly urlRepository: IUrlRepository) {}
+  urlRepository: IUrlRepository;
 
-  async getUrlBySlug(slug: string) {
+  constructor(urlRepository: IUrlRepository) {
+    this.urlRepository = urlRepository;
+  }
+
+  getUrlBySlug = async (slug: string) => {
     return await this.urlRepository.updateUrlBySlug(slug)
   }
 
-  async generateUniqueSlug(): Promise<string> {
+  generateUniqueSlug = async (): Promise<string> => {
     let slug
     let exists = true
     do {
@@ -25,7 +29,7 @@ export class UrlServiceImpl implements IUrlService {
     return slug
   }
 
-  async createShortUrl(longUrl: string) {
+  createShortUrl = async (longUrl: string) => {
     if (!isValidUrl(longUrl)) {
       throw new Error('Invalid URL')
     }
@@ -34,7 +38,7 @@ export class UrlServiceImpl implements IUrlService {
     return await this.urlRepository.createUrl(longUrl, slug)
   }
 
-  async getAllLinks() {
+  getAllLinks = async () => {
     return await this.urlRepository.getAllLinks();
   }
 }

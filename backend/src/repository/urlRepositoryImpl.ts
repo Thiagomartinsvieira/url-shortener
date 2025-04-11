@@ -7,24 +7,24 @@ import { IUrl } from "../domain/Url"
 export class UrlRepositoryImpl implements IUrlRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async updateUrlBySlug(slug: string) {
+  updateUrlBySlug = async (slug: string) => {
     return await this.prisma.url.update({
       where: { slug },
       data: { clicks: { increment: 1 } },
     })
   }
 
-  async createUrl(longUrl: string, slug: string) {
+  createUrl = async (longUrl: string, slug: string) => {
     return await this.prisma.url.create({
       data: { longUrl, slug },
     })
   }
 
-  async isUniqueSlug(slug: string) {
+  isUniqueSlug = async (slug: string) => {
       return await this.prisma.url.findUnique({ where: { slug }})
   }
 
-  async getAllLinks() {
+  getAllLinks = async () => {
     return await this.prisma.url.findMany()
   }
 }
